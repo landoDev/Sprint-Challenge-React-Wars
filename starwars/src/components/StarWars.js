@@ -29,20 +29,25 @@ h2,, h3, p{
   `;
   
 const StarWars = ({ props }) => {
-    const [films] = useState([props.films]);
-    // console.log(props.films)
+    const filmArray = props.films;
+    // console.log(filmArray);
+    const [films, setFilms] = useState([]);
+    const filmList = []
     useEffect(()=>{
-        {films.map(film=>{
-            console.log(film)
-            axios.get(film)
-            .then(response=>{
-                console.log(response.data.title);
-                return <p>{response.data.title}</p>
-                
-            })
-        })}
-        
-    }, [])
+        for(let i = 0; i < filmArray.length; i++)
+        axios.get(filmArray[i])
+        .then(response=>{
+            console.log(response.data.title)
+            setFilms(response.data.title);
+
+        })
+        .catch(error =>{
+            console.log("Failed, I have ", error);
+        })
+    },[])
+    // filmList.push(films);
+    console.log(filmList)
+    
    return(
     <CardDiv>
         <div className="text-content">
@@ -50,10 +55,12 @@ const StarWars = ({ props }) => {
             <p>Birth Year: {props.birth_year}</p>
             <p>Height: {props.height}</p>
             <p>Mass: {props.mass}</p>
-            <h3>Has appeared in: </h3> 
-            {/* {films.map(film=>{
-                return film.
-            })}     */}
+            <h3>Has appeared in: </h3>
+            {/* <ul>
+            {films.map(film=>{
+                return <li>{film}</li>
+            })}; 
+            </ul>   */}
         </div>
     </CardDiv>
    ) 
