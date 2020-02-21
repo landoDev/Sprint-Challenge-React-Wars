@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import StarWars from './components/StarWars';
+import axios from "axios";
 import './App.css';
 
 const App = () => {
@@ -19,6 +20,9 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="Header">React Wars</h1>
+      {data.map(obj =>{
+        return <StarWars props={obj} />
+      })}
     </div>
   );
 }
