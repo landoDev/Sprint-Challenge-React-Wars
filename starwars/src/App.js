@@ -21,7 +21,7 @@ const App = () => {
     <div className="App">
       <h1 className="Header">React Wars</h1>
       {data.map(obj =>{
-        return <StarWars props={obj} />
+        return <StarWars props={obj} key={obj.name}/>
       })}
     </div>
   );
